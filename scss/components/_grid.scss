@@ -1,0 +1,96 @@
+/*===========================================
+  Grid Styles
+===========================================*/
+
+body {
+  @include mq(medium) {
+    margin: 20px auto 0;
+  }
+
+  @include mq(xlarge) {
+    width: 1440px;
+    margin: 60px auto 0;
+  }
+}
+
+#employeeGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#employeeGrid ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.employee {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: solid 1px $alto;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 15px;
+  width: 90%;
+  line-height: .7;
+  transition: all .2s ease-in-out;
+
+  @include mq(medium) {
+    padding: 20px;
+    flex-grow: 1;
+    width: 380px;
+  }
+}
+
+.employee:hover {
+  transition: all .2s ease-in-out;
+  transform: scale(1.02);
+  box-shadow: 3px 3px 10px $boulder;
+}
+
+h3 {
+  font-size: 1.05em;
+
+  @include mq(medium) {
+    font-size: 1.17em;
+  }
+}
+
+.employee p {
+  font-weight: $font-weight--light;
+  font-size: .9em;
+  color: $boulder;
+
+  @include mq(medium) {
+    font-size: 1em;
+  }
+}
+
+h3,
+.employeeText p:last-child {
+  text-transform: capitalize;
+}
+
+.employeeImage {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+
+  @include mq(medium) {
+    height: 128px;
+    width: 128px;
+  }
+}
+
+.employeeText {
+  padding-left: 20px;
+}
