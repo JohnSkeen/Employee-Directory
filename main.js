@@ -1,14 +1,26 @@
+const employeeGrid = document.getElementById('employeeGrid');
 const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modalInfo');
 const closeBtn = document.getElementById('close');
+const userInfoApi = 'https://randomuser.me/api/?nat=us&results=12'
 let currentIndex = 0;
 let employeeData = [];
 
-$.ajax({
-  url: 'https://randomuser.me/api/?nat=us&results=12',
-  dataType: 'json',
-  success: function(data) {
+// ------------------------------------------
+//  FETCH FUNCTIONS
+// ------------------------------------------
+
+function fetchData(url) {
+  return fetch(url)
+            .then(checkStatus)
+            .then(res => res.json())
+            .catch(error => console.log('Looks like there was a problem!', error))
+}
+
+fetchData(userInfoApi)
+  .then(data => {
     let employeeInfo = "<ul id='employeeList'>"
+
     $.each (data.results, function (key, value) {
       employeeInfo += `
       <li class="employee" data-index="` + key + `">
@@ -32,12 +44,21 @@ $.ajax({
       employeeData.push(employeeResults);
     });
     employeeInfo += `</ul>`
-    console.log(data.results);
-    $('#employeeGrid').html(employeeInfo)
-  }
-});
+    employeeGrid.innerHTML = employeeInfo;
+  })
+  .catch(console.log('This does not seem to be working!'))
 
-console.log(employeeData);
+// ------------------------------------------
+//  HELPER FUNCTIONS
+// ------------------------------------------
+
+function checkStatus(response) {
+  if(response.ok) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error(response.statusText));
+  }
+}
 
 function scrollCheck(){
   if (currentIndex == 0) {
