@@ -1,8 +1,6 @@
 const employeeGrid = document.getElementById('employeeGrid');
 const modal = document.getElementById('modal');
-const modalContent = document.getElementById('modalInfo');
-const closeBtn = document.getElementById('close');
-const userInfoApi = 'https://randomuser.me/api/?nat=us&results=12'
+const userInfoApi = 'https://randomuser.me/api/?nat=us&results=12';
 let currentIndex = 0;
 let employeeData = [];
 
@@ -14,12 +12,12 @@ function fetchData(url) {
   return fetch(url)
             .then(checkStatus)
             .then(res => res.json())
-            .catch(error => console.log('Looks like there was a problem!', error))
+            .catch(error => console.log('Looks like there was a problem!', error));
 }
 
 fetchData(userInfoApi)
   .then(data => {
-    let employeeInfo = "<ul id='employeeList'>"
+    let employeeInfo = "<ul id='employeeList'>";
 
     $.each (data.results, function (key, value) {
       employeeInfo += `
@@ -43,10 +41,10 @@ fetchData(userInfoApi)
       };
       employeeData.push(employeeResults);
     });
-    employeeInfo += `</ul>`
+    employeeInfo += `</ul>`;
     employeeGrid.innerHTML = employeeInfo;
   })
-  .catch(console.log('This does not seem to be working!'))
+  .catch(console.log('This does not seem to be working!'));
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
@@ -62,12 +60,12 @@ function checkStatus(response) {
 
 function scrollCheck(){
   if (currentIndex == 0) {
-    $('#scrollLeft').hide()
+    $('#scrollLeft').hide();
   } else if (currentIndex == 11) {
-    $('#scrollRight').hide()
+    $('#scrollRight').hide();
   } else {
-    $('#scrollRight').show()
-    $('#scrollLeft').show()
+    $('#scrollRight').show();
+    $('#scrollLeft').show();
   }
 }
 
@@ -98,7 +96,7 @@ function viewModal(index){
 // Close modal
 $('#close').click(function(){
   $('#modal').hide();
-})
+});
 
 // Scroll modal
 
@@ -112,13 +110,13 @@ $('#scrollRight').click(function(){
   currentIndex += 1;
   scrollCheck();
   viewModal(currentIndex);
-})
+});
 
 // Search Bar
 
 function searchBar() {
   // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
+  var input, filter, ul, li, i, txtValue;
   input = document.getElementById('searchInput');
   filter = input.value.toUpperCase();
   ul = document.getElementById('employeeList');
